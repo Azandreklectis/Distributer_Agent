@@ -1,8 +1,8 @@
 # Distributor Agent (LangChain + Gemini)
 
-Simple web app for your distributor AI concept:
-- Shows a **product catalog** on a local site.
-- Lets you **ask questions directly** to a Gemini-powered sales assistant grounded in your product data.
+A from-scratch starter project for building an AI distributor system:
+- **Knowledge Agent**: creates and updates product KB.
+- **Sales Agent**: chats with shopkeepers, resolves product questions, and nudges toward order intent.
 
 ## 1) Setup
 
@@ -13,40 +13,44 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Set your Gemini key in `.env`.
+Set your Gemini API key in `.env`.
 
-## 2) Run the site
+## 2) Run API
 
 ```bash
 python main.py
 ```
 
-Open `http://localhost:8000`.
+Server: `http://localhost:8000`
 
-## 3) What you can do
+## 3) Load product knowledge
 
-1. View product cards from `data/sample_products.json`.
-2. Ask pricing/margin/offer questions in the text box.
-3. Get grounded responses using vector search + Gemini.
-
-## 4) Replace with your own catalog
-
-Update `data/sample_products.json` using this structure per product:
-
-```json
-{
-  "sku": "BIS-001",
-  "name": "Crispy Butter Biscuits 200g",
-  "category": "Biscuits",
-  "mrp": 40,
-  "distributor_price": 31,
-  "retailer_margin_percent": 22.5,
-  "moq": 24,
-  "shelf_life_days": 180,
-  "benefits": ["High repeat purchase"],
-  "offers": ["Buy 10 boxes get 1 free"],
-  "source": "launch-sheet-july"
-}
+```bash
+curl -X POST http://localhost:8000/kb/products \
+  -H "Content-Type: application/json" \
+  -d @<(python - <<'PY'
+import json
+from pathlib import Path
+print(json.dumps({"products": json.loads(Path('data/sample_products.json').read_text())}))
+PY
+)
 ```
 
-Restart the app after editing data.
+## 4) Chat endpoint
+
+```bash
+curl -X POST http://localhost:8000/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shopkeeper_id": "shop-101",
+    "message": "What margin do I get on BIS-001 and do you have any offer?",
+    "language": "en"
+  }'
+```
+
+## 5) Next upgrades
+
+- Add WhatsApp connector
+- Add CRM sync for lead/order creation
+- Add multilingual prompting and regional scripts
+- Add LangGraph state machine for robust multi-step sales flows
