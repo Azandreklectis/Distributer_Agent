@@ -15,6 +15,6 @@ def get_chat_llm(temperature: float = 0.2) -> ChatGoogleGenerativeAI:
 def get_embeddings() -> GoogleGenerativeAIEmbeddings:
     settings = get_settings()
     return GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001",
+        model=settings.embedding_model,
         google_api_key=settings.google_api_key,
     )

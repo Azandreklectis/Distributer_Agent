@@ -1,9 +1,8 @@
 import json
-from pathlib import Path
-
+from app.core.paths import DATA_DIR
 from app.schemas.product import Product
 
-CATALOG_PATH = Path("data/sample_products.json")
+CATALOG_PATH = DATA_DIR / "sample_products.json"
 
 
 def load_catalog() -> list[Product]:
