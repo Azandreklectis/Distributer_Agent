@@ -3,6 +3,9 @@
 Simple web app for your distributor AI concept:
 - Shows a **product catalog** on a local site.
 - Lets you **ask questions directly** to a Gemini-powered sales assistant grounded in your product data.
+A from-scratch starter project for building an AI distributor system:
+- **Knowledge Agent**: creates and updates product KB.
+- **Sales Agent**: chats with shopkeepers, resolves product questions, and nudges toward order intent.
 
 ## 1) Setup
 
