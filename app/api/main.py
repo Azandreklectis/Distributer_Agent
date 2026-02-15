@@ -4,6 +4,7 @@ from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI, HTTPException
 
 from app.agents.knowledge_agent import KnowledgeAgent
 from app.agents.sales_agent import SalesAgent
@@ -14,6 +15,8 @@ from app.services.catalog import load_catalog
 app = FastAPI(title="Distributor Agent API", version="0.2.0")
 app.mount("/static", StaticFiles(directory="app/web/static"), name="static")
 templates = Jinja2Templates(directory="app/web/templates")
+
+app = FastAPI(title="Distributor Agent API", version="0.1.0")
 
 
 @lru_cache

@@ -17,3 +17,8 @@ def test_home_page_renders() -> None:
     assert response.status_code == 200
     assert "Distributor AI Catalog Assistant" in response.text
     assert "Crispy Butter Biscuits 200g" in response.text
+def test_health_endpoint() -> None:
+    client = TestClient(app)
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
