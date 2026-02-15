@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Distributor AI Catalog</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Distributor AI Catalog Assistant</h1>
+      <p>Browse products and ask sales questions directly.</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Product Catalog</h2>
+        <div class="grid">
+          {% for product in products %}
+          <article class="card">
+            <h3>{{ product.name }}</h3>
+            <p><strong>SKU:</strong> {{ product.sku }}</p>
+            <p><strong>Category:</strong> {{ product.category }}</p>
+            <p><strong>MRP:</strong> ₹{{ product.mrp }}</p>
+            <p><strong>Distributor Price:</strong> ₹{{ product.distributor_price }}</p>
+            <p><strong>Retail Margin:</strong> {{ product.retailer_margin_percent }}%</p>
+            <p><strong>MOQ:</strong> {{ product.moq }}</p>
+            {% if product.offers %}
+            <p><strong>Offer:</strong> {{ product.offers | join(', ') }}</p>
+            {% endif %}
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="chat-box">
+        <h2>Ask about products</h2>
+        <form method="post" action="/ask">
+          <textarea name="question" rows="4" placeholder="e.g. What margin and offers are available for BIS-001?" required>{{ question }}</textarea>
+          <button type="submit">Ask Assistant</button>
+        </form>
+
+        {% if reply %}
+        <div class="reply">
+          <h3>Assistant reply</h3>
+          <p>{{ reply.reply }}</p>
+          <small>{{ reply.confidence_note }}</small>
+        </div>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

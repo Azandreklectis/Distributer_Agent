@@ -1,0 +1,28 @@
+[
+  {
+    "sku": "BIS-001",
+    "name": "Crispy Butter Biscuits 200g",
+    "category": "Biscuits",
+    "mrp": 40,
+    "distributor_price": 31,
+    "retailer_margin_percent": 22.5,
+    "moq": 24,
+    "shelf_life_days": 180,
+    "benefits": ["High repeat purchase", "Tea-time favorite"],
+    "offers": ["Buy 10 boxes get 1 free"],
+    "source": "launch-sheet-july"
+  },
+  {
+    "sku": "SNK-010",
+    "name": "Masala Mixture 1kg",
+    "category": "Snacks",
+    "mrp": 180,
+    "distributor_price": 144,
+    "retailer_margin_percent": 20,
+    "moq": 10,
+    "shelf_life_days": 120,
+    "benefits": ["Fast-moving in kirana stores", "Strong evening demand"],
+    "offers": ["Extra 2% margin on first order"],
+    "source": "offer-circular-aug"
+  }
+]
