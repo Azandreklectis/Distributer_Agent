@@ -1,7 +1,6 @@
-from pathlib import Path
-
 from langchain_core.prompts import ChatPromptTemplate
 
+from app.core.paths import PROMPTS_DIR
 from app.services.llm import get_chat_llm
 from app.tools.kb_search import search_product_knowledge
 
@@ -10,7 +9,7 @@ class SalesAgent:
     """Conversational agent that answers shopkeeper queries and nudges toward order intent."""
 
     def __init__(self) -> None:
-        prompt_path = Path("app/prompts/sales_system_prompt.txt")
+        prompt_path = PROMPTS_DIR / "sales_system_prompt.txt"
         system_prompt = prompt_path.read_text(encoding="utf-8")
 
         self.prompt = ChatPromptTemplate.from_messages(
